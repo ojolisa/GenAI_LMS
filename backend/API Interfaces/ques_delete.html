@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Delete Question</h2>
+    <form id="delete-question-form">
+        <label for="id">Question ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <input type="submit" value="Delete">
+    </form>
+    <script>
+        $("#delete-question-form").submit(function (e) {
+            e.preventDefault();
+            var id = $("#id").val();
+            $.ajax({
+                url: 'http://localhost:5000/question/' + id,
+                type: 'DELETE',
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

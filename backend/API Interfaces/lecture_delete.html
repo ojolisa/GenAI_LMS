@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Delete Lecture</h2>
+    <form id="delete-lecture-form">
+        <label for="id">Lecture ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <input type="submit" value="Delete">
+    </form>
+    <script>
+        $("#delete-lecture-form").submit(function (e) {
+            e.preventDefault();
+            var id = $("#id").val();
+            $.ajax({
+                url: 'http://localhost:5000/lecture/' + id,
+                type: 'DELETE',
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

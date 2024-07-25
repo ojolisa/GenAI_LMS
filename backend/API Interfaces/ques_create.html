@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+
+    <h2>Create Question</h2>
+    <form id="create-question-form">
+        <label for="question">Question:</label><br>
+        <input type="text" id="question" name="question"><br>
+        <label for="option1">Option 1:</label><br>
+        <input type="text" id="option1" name="option1"><br>
+        <label for="option2">Option 2:</label><br>
+        <input type="text" id="option2" name="option2"><br>
+        <label for="option3">Option 3:</label><br>
+        <input type="text" id="option3" name="option3"><br>
+        <label for="option4">Option 4:</label><br>
+        <input type="text" id="option4" name="option4"><br>
+        <label for="correctOption">Correct Option:</label><br>
+        <input type="text" id="correctOption" name="correctOption"><br>
+        <label for="assignmentId">Assignment ID:</label><br>
+        <input type="text" id="assignmentId" name="assignmentId"><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        $("#create-question-form").submit(function (e) {
+            e.preventDefault();
+
+            var question = $("#question").val();
+            var option1 = $("#option1").val();
+            var option2 = $("#option2").val();
+            var option3 = $("#option3").val();
+            var option4 = $("#option4").val();
+            var correctOption = $("#correctOption").val();
+            var assignmentId = $("#assignmentId").val();
+
+            var options = [option1, option2, option3, option4];
+
+            $.ajax({
+                url: 'http://localhost:5000/question',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    question: question,
+                    options: options,
+                    correctOption: correctOption,
+                    assignmentId: assignmentId
+                }),
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

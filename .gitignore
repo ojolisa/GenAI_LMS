@@ -1,0 +1,8 @@
+# Node modules
+node_modules/
+
+# Python environment
+venv/
+
+# Environment variables
+.env

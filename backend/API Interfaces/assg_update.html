@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Update Assignment</h2>
+    <form id="update-assignment-form">
+        <label for="id">Assignment ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <label for="assignmentName">Assignment Name:</label><br>
+        <input type="text" id="assignmentName" name="assignmentName"><br>
+        <label for="weekId">Week ID</label><br>
+        <input type="text" id="weekId" name="weekId"><br>
+        <input type="submit" value="Update">
+    </form>
+    <script>
+        $("#update-assignment-form").submit(function (e) {
+            e.preventDefault();
+            var id = $("#id").val();
+            var assignmentName = $("#assignmentName").val();
+            var weekId = $("#weekId").val();
+            $.ajax({
+                url: 'http://localhost:5000/assignment/' + id,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    name: assignmentName,
+                    weekId: weekId
+                }),
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

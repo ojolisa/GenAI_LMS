@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations - Programming Assignment</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Update Programming Assignment</h2>
+    <form id="update-progassg-form">
+        <label for="id">Programming Assignment ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="question">Question:</label><br>
+        <input type="text" id="question" name="question"><br>
+        <label for="weekId">Week ID:</label><br>
+        <input type="text" id="weekId" name="weekId"><br>
+        <input type="submit" value="Update">
+    </form>
+    <script>
+        $("#update-progassg-form").submit(function (e) {
+            e.preventDefault();
+            var id = $("#id").val();
+            var name = $("#name").val();
+            var question = $("#question").val();
+            var weekId = $("#weekId").val();
+
+            $.ajax({
+                url: "http://localhost:5000/progassg/" + id,
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify({ name: name, question: question, weekId: weekId }),
+                success: function (response) {
+                    alert("Programming Assignment Updated Successfully!");
+                },
+                error: function (xhr, status, error) {
+                    alert("Error: " + xhr.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

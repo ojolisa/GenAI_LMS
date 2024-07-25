@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Create Lecture</h2>
+    <form id="create-lecture-form">
+        <label for="lectureName">Lecture Name:</label><br>
+        <input type="text" id="lectureName" name="lectureName"><br>
+        <label for="video">Video URL:</label><br>
+        <input type="text" id="video" name="video"><br>
+        <label for="weekId">Week ID:</label><br>
+        <input type="text" id="weekId" name="weekId"><br>
+        <input type="submit" value="Create">
+    </form>
+    <script>
+        $("#create-lecture-form").submit(function (e) {
+            e.preventDefault();
+            var lectureName = $("#lectureName").val();
+            var video = $("#video").val();
+            var weekId = $("#weekId").val();
+            $.ajax({
+                url: 'http://localhost:5000/lecture',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    name: lectureName,
+                    video: video,
+                    weekId: weekId
+                }),
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

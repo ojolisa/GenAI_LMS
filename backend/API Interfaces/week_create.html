@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>CRUD Operations</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>CRUD Operations</h1>
+    <h2>Create Week</h2>
+    <form id="create-week-form">
+        <label for="weekName">Week Name:</label><br>
+        <input type="text" id="weekName" name="weekName"><br>
+        <input type="submit" value="Create">
+    </form>
+    <script>
+        $("#create-week-form").submit(function (e) {
+            e.preventDefault();
+            var weekName = $("#weekName").val();
+            $.ajax({
+                url: 'http://localhost:5000/week',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    weekName: weekName
+                }),
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
